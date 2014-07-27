@@ -8,7 +8,7 @@ class GoogleDirections
 
   attr_reader :status, :doc, :xml, :origin, :destination, :options
 
-  @@base_url = 'http://maps.googleapis.com/maps/api/directions/xml'
+  @@base_url = 'https://maps.googleapis.com/maps/api/directions/xml'
 
   @@default_options = {
     :language => :en,
@@ -20,7 +20,7 @@ class GoogleDirections
   def initialize(origin, destination, opts=@@default_options)
     @origin = origin
     @destination = destination
-    @options = opts.merge({:origin => transcribe(@origin), :destination => transcribe(@destination)})
+    @options = opts.merge({:origin => (@origin), :destination => (@destination)})
 
     @url = @@base_url + '?' + @options.to_query
     @xml = open(@url).read
